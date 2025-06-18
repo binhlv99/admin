@@ -1,0 +1,201 @@
+<app-layout>
+    <mat-toolbar class="page-header" role="heading">
+        <h1>Gói nạp</h1>
+    </mat-toolbar>
+
+    <div class="tables-wrapper">
+        <mat-card class="list-game-wrapper">
+            <mat-card-title class="list-game-wrapper__header">
+                <p *ngIf="id != 0" class="list-package-wrapper__title">Sửa gói nạp</p>
+                <p *ngIf="id == 0" class="list-package-wrapper__title">Thêm gói nạp</p>
+            </mat-card-title>
+            <mat-card-content class="list-game__content">
+                <form style="margin-left: 50px;" [formGroup]="packageForm" action="" method="POST">
+                    <div class="container" style="margin-top: 10px;">
+                        <!--                        <div class="row">-->
+                        <!--                            <div class="col-sm-6 left-col q-col">-->
+                        <!--                                -->
+                        <!--                            </div>-->
+                        <!--                            <div class="col-sm-6 right-col q-col">-->
+                        <!--                                                            </div>-->
+                        <!--                        </div>-->
+                        <!--                        <div class="row">-->
+                        <!--                            <div class="col-sm-6 left-col q-col">-->
+                        <!--                                -->
+                        <!--                            </div>-->
+                        <!--                            <div class="col-sm-6 right-col q-col">-->
+                        <!--                                <div class="col-sm-12">-->
+                        <!--                                    <div class="row">-->
+                        <!--                                        <div class="col">-->
+                        <!--                                            -->
+                        <!--                                        </div>-->
+                        <!--                                        <div class="col">-->
+                        <!--                                            <button class="sv-btn" (click)="openServerDialog()">Máy chủ</button>-->
+                        <!--                                        </div>-->
+                        <!--                                    </div>-->
+                        <!--                                </div>-->
+                        <!--                            </div>-->
+                        <!--                        </div>-->
+                        <div class="row">
+                            <div class="col-sm-6 left-col q-col">
+                                <!--                                <div class="form-group">-->
+                                <!--                                    <mat-form-field class="example-full-width" appearance="fill">-->
+                                <!--                                        <mat-label>Thời gian</mat-label>-->
+                                <!--                                        <input type="text" matInput formControlName="deliveryTime">-->
+                                <!--                                    </mat-form-field>-->
+                                <!--                                </div>-->
+                                <div class="form-group">
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Tên gói</mat-label>
+                                        <input type="text" matInput formControlName="name">
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group">
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Category</mat-label>
+                                        <input type="text" matInput formControlName="attribute">
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group">
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Giá</mat-label>
+                                        <input type="number" matInput formControlName="price">
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group">
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Giảm giá</mat-label>
+                                        <input type="number" matInput formControlName="tradeCount">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 right-col q-col">
+                                <div class="form-group">
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Đơn vị</mat-label>
+                                        <input type="text" matInput formControlName="unit">
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group">
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Số lượng</mat-label>
+                                        <input type="number" matInput formControlName="warehouseQuantity">
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group">
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <select formControlName="gameId" matNativeControl>
+                                            <option value="0" selected>Vui lòng chọn game</option>
+                                            <option *ngFor="let game of games" [value]="game.id">
+                                                {{ game.name }}
+                                            </option>
+                                        </select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group">
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <select formControlName="topSale" matNativeControl>
+                                            <option value="" selected>Vui lòng chọn top sale</option>
+                                            <option value="ACTIVE" >TOP SALE</option>
+                                            <option value="INACTIVE">KHÔNG</option>
+                                        </select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6 left-col q-col">
+                                <div class="form-group example-full-width">
+                                    <mat-label>Mô tả (VI)</mat-label>
+                                    <ckeditor data="<p>Mô tả (EN)</p>" formControlName="descriptionVi">
+                                    </ckeditor>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 right-col q-col">
+                                <div class="form-group example-full-width">
+                                    <mat-label>Mô tả (EN)</mat-label>
+                                    <ckeditor data="<p>Mô tả (EN)</p>" formControlName="descriptionEn">
+                                    </ckeditor>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <!-- <label for="imageId">Ảnh</label> <br> -->
+                                    Size ảnh : 320 x 440
+                                    <input type="file" class="form-control-file"  (change)="onFileChanged($event)">
+                                    <br/>
+                                    <img [src]="url" style="max-width: 100px; margin: 20px;" alt="">
+                                    <br/>
+                                    <button class="btn btn-warning"  (click)="onDeleteFile()">
+                                        Xoá Ảnh
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="container">
+                                    <p class="title-table">Danh sách Server</p>
+                                    <div class="table">
+                                        <div class="row q-row" *ngFor="let sg of serverGroup">
+                                            <div class="col-sm-12 q-col"
+                                                 (click)="getServer(sg.id, listServer, sg.name)">
+                                                <div class="row">
+                                                    <div class="col" id=" {{sg.name}}">
+                                                        {{sg.name}}
+                                                    </div>
+                                                    <div class="col">
+                                                        <mat-icon style="cursor: pointer;"
+                                                                  (click)="checkAddStatus(sg.id)">
+                                                            clear
+                                                        </mat-icon>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12" style="text-align: center;">
+                                                <button mat-flat-button ele class="btn" *ngIf="checkAdd == 0&&!endProcess"
+                                                        (click)="addServer()">
+                                                    <mat-icon>add</mat-icon>
+                                                </button>
+                                                <form [formGroup]="serverForm" *ngIf="checkAdd != 0">
+                                                    <input class="q-input" type="text" placeholder="Ten server"
+                                                           [(ngModel)]="inputValue"
+                                                           formControlName="name">
+                                                    <input type="submit" (click)="checkAddStatus(0)" hidden/>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <mat-star-rating [rating]="rating" [starCount]="starCount"
+                                         [color]="starColor"
+                                         (ratingUpdated)="onRatingChanged($event)"></mat-star-rating>
+                        <br/>
+                        <br/>
+                        <div class="row">
+                            <div class="col-sm-12 submitButton">
+                                <button *ngIf="id != 0" type="submit" class="btn btn-primary btn-edit"  [disabled]="endProcess"
+                                        (click)="onUpdatePackage()">Sửa
+                                </button>
+                                <button *ngIf="id != 0" type="submit" class="btn btn-warning btn-edit"  [disabled]="changeStatus"
+                                        (click)="onChangeStatus()">Sửa Status
+                                </button>
+                                <button *ngIf="id == 0 || id == undefined" type="submit" [disabled]="endProcess"
+                                        class="btn btn-primary btn-edit" (click)="onUpdatePackage()" >Thêm
+                                </button>
+                                <button class="btn btn-warning btn-back" routerLink="{{routes.PACKAGE}}">Trở về</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <app-footer></app-footer>
+</app-layout>

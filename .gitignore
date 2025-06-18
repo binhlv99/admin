@@ -1,0 +1,11 @@
+
+node_modules/
+*.txt
+*.svg
+*.png
+*.ico
+*.woff2
+*.eot
+*.woff
+*.ttf
+dist/

@@ -1,0 +1,24 @@
+<mat-card-title class="list-server-wrapper__header">
+    <p class="list-server-wrapper__title">Danh sách Server</p>
+</mat-card-title>
+<!-- <mat-card-content> -->
+<div style="display: flex; justify-content: space-between;">
+    <div class="container">
+        <p class="title-table">Server</p>
+        <div class="table">
+            <div class="row q-row" *ngFor="let s of server">
+                <div class="col-sm-12 q-col">
+                    <span *ngIf="serverGroupName!= ''">({{serverGroupName}})</span> <span class="s-name">{{s.name}}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12" style="text-align: center;">
+                    <button mat-flat-button class="btn">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- </mat-card-content> -->
