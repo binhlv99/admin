@@ -1,3 +1,6 @@
+install yarn
+npm install -g yarn
+
 install nodemodule truoc băng terminal
 
 npm install
