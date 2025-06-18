@@ -3,8 +3,8 @@ npm install -g yarn
 
 install nodemodule truoc băng terminal
 
-npm install
+yarn install
 
 chay project
 
-npm start
+yarn start
